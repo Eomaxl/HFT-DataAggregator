@@ -6,8 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+actix = "0.13.5"
+actix-web-actors = "4.3.0"
+actix-web = "4.9.0"
 tokio = {version = "1.39.2", features = ["full"]}
-reqwest = {version = "0.11.27", features = ["json" , "blocking"]}
+tokio-native-tls = "0.3.1"
+native-tls = "0.2.12"
+reqwest = {version = "0.12.5", features = ["json" , "blocking"]}
 tokio-tungstenite = "0.15"
 futures = "0.3"
 log = "0.4"
@@ -18,3 +23,5 @@ chrono = "0.4"
 sqlx = { version = "0.8.0", features = ["runtime-tokio-native-tls", "postgres"] }
 env_logger = "0.11.5"
 dotenv = "0.15.0"
+webpki-roots = "0.26.3"
+secrecy = "0.8.0"
