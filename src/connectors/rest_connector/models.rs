@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Stock {
     pub symbol: String,
     pub name: String,
@@ -13,7 +13,7 @@ pub struct Stock {
     pub type_: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct TimeSeriesMeta {
     pub symbol: String,
     pub interval: String,
@@ -23,7 +23,7 @@ pub struct TimeSeriesMeta {
     pub type_: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct TimeSeriesValue {
     pub datetime: String,
     pub open: String,
@@ -33,20 +33,20 @@ pub struct TimeSeriesValue {
     pub volume: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct TimeSeriesResponse {
     pub meta: TimeSeriesMeta,
     pub values: Vec<TimeSeriesValue>,
     pub status: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct OrderBookLevel {
     pub price: String,
     pub quantity: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct OrderBookResponse {
     pub symbol: String,
     pub bids: Vec<OrderBookLevel>,

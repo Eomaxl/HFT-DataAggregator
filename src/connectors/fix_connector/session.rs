@@ -4,8 +4,8 @@ use tokio::sync::mpsc::{Sender, Receiver};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
 use tokio_native_tls::TlsStream;
-use std::sync::Arc;
 use std::error::Error;
+use std::fmt;
 use crate::connectors::fix_connector::message::FixMessage;
 
 pub struct FixSession {
@@ -60,11 +60,11 @@ impl FixSession {
     pub async fn receive_message(&mut self) -> Option<String> {
         if let Some(ref mut stream) = self.stream {
             let mut buf = vec![0; 1024];
-            match stream.read(&mut buf).await {
+            return match stream.read(&mut buf).await {
                 Ok(n) if n > 0 => {
-                    return Some(String::from_utf8_lossy(&buf[..n]).to_string());
+                    Some(String::from_utf8_lossy(&buf[..n]).to_string())
                 }
-                _ => return None,
+                _ => None,
             }
         }
         None
@@ -77,8 +77,16 @@ impl FixSession {
 
 async fn connect_to_fix_server(address: &str) -> Result<TlsStream<TcpStream>, Box<dyn Error>> {
     let stream = TcpStream::connect(address).await?;
-    let native_tls_connector = tokio_native_tls::native_tls::TlsConnector::new()?;
+    let native_tls_connector = native_tls::TlsConnector::new()?;
     let tls_connector = tokio_native_tls::TlsConnector::from(native_tls_connector);
     let tls_stream = tls_connector.connect("example.com", stream).await?;
     Ok(tls_stream)
+}
+
+// Implementing Display trait for FixMessage
+impl fmt::Display for FixMessage {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        // Format FixMessage fields as needed
+        write!(f, "FIX message with fields: {:?}", self.fields)
+    }
 }

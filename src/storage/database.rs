@@ -17,16 +17,16 @@ impl Database {
         Database { pool }
     }
 
-    pub async fn store_data(&self, data: &StockData) -> Result<(), sqlx::Error> {
-        query!(
-            "INSERT INTO stock_data (symbol, price, timestamp) VALUES ($1, $2, $3)",
-            data.symbol,
-            data.price,
-            data.timestamp
-        )
-            .execute(&self.pool)
-            .await?;
-
-        Ok(())
-    }
+    // pub async fn store_data(&self, data: &StockData) -> Result<(), sqlx::Error> {
+    //     query!(
+    //         "INSERT INTO stock_data (symbol, price, timestamp) VALUES ($1, $2, $3)",
+    //         data.symbol,
+    //         data.price,
+    //         data.timestamp
+    //     )
+    //         .execute(&self.pool)
+    //         .await?;
+    //
+    //     Ok(())
+    // }
 }
