@@ -25,8 +25,43 @@ high concurrency are critical.
 </ul>
 
 # APIs Exposed by the Application
-<b>1. Stock List API</b>
-
+<h4>1. Stock List API</h4>
+<ul>
+    <li>
+        Endpoint: http://127.0.0.1:8080/stocks
+    </li>
+    <li>Method: GET</li>
+    <li>Query Parameters (all optional):
+        <ul>
+            <li>symbol: Filter by symbol (e.g., AAPL).</li>
+            <li>exchange: Filter by exchange name (e.g., NASDAQ).</li>
+            <li>mic_code: Filter by market identifier code (MIC) (e.g., XNAS).</li>
+            <li>country: Filter by country (e.g., United States).</li>
+            <li>type_: Filter by instrument type (e.g., Common Stock).</li>
+        </ul>
+    </li>
+    <li>Example curl Command:
+        <ul>
+            <li>curl "http://127.0.0.1:8080/stocks?symbol=AAPL&exchange=NASDAQ"</li>
+        </ul>
+    </li>
+    <li>Example Response:
+        <ul>
+            <li>[
+    {
+        "symbol": "AAPL",
+        "name": "Apple Inc",
+        "currency": "USD",
+        "exchange": "NASDAQ",
+        "mic_code": "XNAS",
+        "country": "United States",
+        "type_": "Common Stock"
+    }
+]
+</li>
+        </ul>
+    </li>
+</ul>
 # Building and Running the Application
 <b>Prerequisites</b>
 <ul>
